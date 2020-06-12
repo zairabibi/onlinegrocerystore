@@ -1,0 +1,183 @@
+package project;
+
+/*******************************************************************************************************
+ * The second stage of the program is Login. This class displays a login window which prompts the user
+ * to login by giving his username and password. If the username and password match the ones stored in
+ * UserData file, then the user is allowed to go ahead. If either one of them doesn't match, then the
+ * message "Either the username or password is incorrect. Try Again" is displayed and user is allowed to
+ * enter again.
+ *
+ * However, if the user doesn't have an account, then he can make a new one by clicking on the "Sign Up"
+ * button. Which is the next stage of our program.
+ ********************************************************************************************************/
+
+//import statements
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Login_Window {
+
+    private String UserEmail; //to store UserId
+    private  String UserName; //to store UserName
+    private String password; //to store password
+
+    Signup_Window signup_obj=new Signup_Window();
+
+    //**********************************************INITIALIZING BUTTONS*********************************************//
+    Button btn_login = new Button("LOGIN");//login button
+    Button btn_signUp = new Button("SIGN UP"); //sign up button
+
+    //**********************************************INITIALIZING LABEL*********************************************//
+    Label lbl_Msg = new Label("Login\n\n"); //label to display message
+    Label lbl_Incorrect=new Label();
+
+    //*******************************************INITIALIZING TEXTFIELDS*******************************************//
+    TextField txt_userName = new TextField(); //textfield to enter username
+    PasswordField txt_password = new PasswordField();//textfield to enter password
+
+    public void setLoginWindow(){
+
+        //setting up Buttons
+        btn_login.setStyle("-fx-text-fill: navy; -fx-font-weight: bold; -fx-font-style: italic");
+        btn_signUp.setStyle("-fx-text-fill: navy; -fx-font-weight: bold; -fx-font-style: italic");
+
+
+        //setting up message label
+        lbl_Msg.setStyle("-fx-text-fill: midnightblue; -fx-font-size: 40px; -fx-font-weight: bold; -fx-underline: true");
+        lbl_Incorrect.setStyle("-fx-text-fill: red; -fx-font-size: 10px; -fx-font-weight: bold; -fx-wrap-text: true");
+
+        //setting up textField
+        txt_userName.setMaxSize(150, 20);
+        txt_password.setMaxSize(150, 20);
+
+        //An HbBox to hold the buttons
+        HBox buttons=new HBox(5);
+
+        //Setting the HBox
+        buttons.setAlignment(Pos.CENTER);
+        buttons.getChildren().addAll(btn_login, btn_signUp);//adding buttons to HBox
+
+        //Setting up the image
+        Image loginImage=new Image("file:login.png");
+        ImageView loginIV=new ImageView();
+        loginIV.setImage(loginImage);
+        loginIV.setPreserveRatio(true);
+        loginIV.setFitWidth(290);
+
+        //A VBox to contain everything
+        VBox layout=new VBox(10);
+
+        //Setting the VBox and StackPane
+        layout.getChildren().addAll(lbl_Msg, lbl_Incorrect, txt_userName, txt_password, buttons);
+        layout.setAlignment(Pos.TOP_CENTER);
+
+        StackPane pane=new StackPane();
+        pane.getChildren().addAll(loginIV, layout);
+
+        Stage loginStage=new Stage();
+        Scene loginScene=new Scene(pane, 300, 270);
+
+        loginStage.setScene(loginScene);
+        loginStage.show();
+
+        //***************************************ACTION HANDLERS******************************************************//
+
+        //*********setting Action for btn_login***************//
+        btn_login.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+                //try block to catch any exception which might've been thrown
+                try {
+                    //verifyLogin() checks the validity of username and password
+                    if(verifyLogin()){
+                        //all textfields are cleared and the next Window is set up
+                        txt_password.clear();
+                        txt_userName.clear();
+                        loginStage.close();
+                        ShoppingGUI shopping_obj = new ShoppingGUI();
+                        shopping_obj.setGUI();
+
+                    }//end if
+                    else{
+                        //else this message is shown
+                        lbl_Incorrect.setText("*Either the username or password is incorrect. Try again:");
+                        txt_password.clear();
+                        txt_userName.clear();
+
+                    }//end else
+                } //end try
+                catch (Exception e) { e.printStackTrace(); }
+
+            }//end handle(ActionEvent actionevent)
+        });//end btn_login.setOnAction()
+
+        //Setting Action for btn_signUp
+        btn_signUp.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                //sets up the window for sign up
+                loginStage.close();
+                signup_obj.setSignupWindow();
+
+            }//end handle(ActionEvent actionEvent)
+        });//end btn_signUp.setOnAction()
+
+
+
+    }
+
+    //************************************************METHODS******************************************************//
+
+    //method verifyLogin() to check the username and password
+    public boolean verifyLogin(){
+        if(verifyUserName_and_Password())
+            return true;
+        else
+            return false;
+    }// end verifyLogin()
+
+    // method verifyUserName() to check the password and return true if password matches while returns false otherwise
+    public boolean verifyUserName_and_Password(){
+
+        //userFile_Object to access the method of UserFile Class
+        UserFile userFile_Object=new UserFile();
+
+        try {
+            userFile_Object.write("");
+            //Scanner Object to read the file
+            Scanner readFile = new Scanner(userFile_Object.file);
+
+            while (readFile.hasNext()) {
+
+                UserEmail = readFile.next();
+                UserName = readFile.next();
+                password = readFile.next();
+
+                if (UserName.equals(txt_userName.getText())&& password.equals(txt_password.getText())) {
+                    return true;
+                }//end if
+
+
+            }//end while
+        }//end try
+        catch(FileNotFoundException e){e.getStackTrace();}
+
+        return false;
+    }//end verifyUserName()
+
+}
