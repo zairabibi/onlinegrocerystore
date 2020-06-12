@@ -1,0 +1,94 @@
+Item Name: Pasta, Quantity: 20, Price: 400.0
+Rs. 600.0
+Item Name: Cheese/500g, Quantity: 1, Price: 20.0
+Rs. 600.0
+Item Name: Mutton/kg, Quantity: 20, Price: 180.0
+Rs. 600.0
+Item Name: Pasta, Quantity: 22, Price: 440.0
+Rs. 704.0
+Item Name: Cereal, Quantity: 44, Price: 264.0
+Rs. 704.0
+Item Name: Oil/litre, Quantity: 45, Price: 450.0Item Name: Cereal, Quantity: 22, Price: 132.0
+Total Price: Rs. 582.0
+Item Name: Bread, Quantity: 3, Price: 120.0
+Item Name: Onions/kg, Quantity: 4, Price: 120.0
+Item Name: Beef/kg, Quantity: 5, Price: 5.0
+
+Total Price: Rs. 245.0
+Item Name: Pasta, Quantity: 3, Price: 60.0
+Item Name: Garlic/250g, Quantity: 4, Price: 160.0
+Total Price: Rs. 220.0
+
+Item Name: Pasta, Quantity: 3, Price: 60.0
+Item Name: Butter/200g, Quantity: 78, Price: 4680.0
+Item Name: Garlic/250g, Quantity: 4, Price: 160.0
+Total Price: Rs. 4900.0
+
+Item Name: Oil/litre, Quantity: 0, Price: 0.0
+Total Price: 
+
+Item Name: Oil/litre, Quantity: 0, Price: 0.0
+Total Price: 
+
+Item Name: Rice/kg, Quantity: 20, Price: 600.0
+Item Name: Bread, Quantity: 1, Price: 40.0
+Item Name: Sugar/kg, Quantity: 2, Price: 140.0
+Item Name: Honey/200ml, Quantity: 3, Price: 6.0
+Total Price: Rs. 786.0
+
+Item Name: Oil/litre, Quantity: 0, Price: 0.0
+Item Name: Butter/200g, Quantity: 0, Price: 0.0
+Total Price: Rs. 0.0
+
+Item Name: Eggs/12, Quantity: 0, Price: 0.0
+Item Name: Cheese/500g, Quantity: 0, Price: 0.0
+Item Name: Onions/kg, Quantity: 0, Price: 0.0
+Total Price: Rs. 0.0
+
+Item Name: Oil/litre, Quantity: 1, Price: 10.0
+Item Name: Butter/200g, Quantity: 2, Price: 120.0
+Item Name: Cheese/500g, Quantity: 4, Price: 80.0
+Total Price: Rs. 210.0
+
+Item Name: Rice/kg, Quantity: 2, Price: 60.0
+Item Name: Flour/kg, Quantity: 4, Price: 200.0
+Item Name: Butter/200g, Quantity: 1, Price: 60.0
+Item Name: Eggs/12, Quantity: 4, Price: 80.0
+Total Price: Rs. 400.0 Order ID: 00001
+
+Item Name: Rice/kg, Quantity: 2, Price: 60.0
+Item Name: Milk/litre, Quantity: 10, Price: 100.0
+Total Price: Rs. 160.0 Order ID: 2.0Item Name: Rice/kg, Quantity: 90, Price: 2700.0
+Item Name: Onions/kg, Quantity: 10, Price: 300.0
+Total Price: Rs. 3000.0 Order ID: 00002
+
+Item Name: Rice/kg, Quantity: 2, Price: 60.0
+Item Name: Cheese/500g, Quantity: 3, Price: 60.0
+Total Price: Rs. 120.0 Order ID: 00003
+
+Item Name: Flour/kg, Quantity: 1, Price: 50.0
+Item Name: Butter/200g, Quantity: 5, Price: 300.0
+Item Name: Eggs/12, Quantity: 4, Price: 80.0
+Total Price: Rs. 430.0 Order ID: 00004
+
+Item Name: Rice/kg, Quantity: 6, Price: 180.0
+Item Name: Pulses/kg, Quantity: 7, Price: 350.0
+Total Price: Rs. 530.0 Order ID: 00005
+
+Item Name: Milk/litre, Quantity: 6, Price: 60.0
+Item Name: Mutton/kg, Quantity: 7, Price: 63.0
+Total Price: Rs. 123.0 Order ID: 00006
+
+Item Name: Bread, Quantity: 4, Price: 160.0
+Item Name: Pulses/kg, Quantity: 3, Price: 150.0
+Total Price: Rs. 310.0 Order ID: 00007
+
+Item Name: Oil/litre, Quantity: 1, Price: 10.0
+Item Name: Milk/litre, Quantity: 5, Price: 50.0
+Item Name: Vinegar/litre, Quantity: 6, Price: 24.0
+Total Price: Rs. 84.0 Order ID: 00008
+
+Item Name: Flour/kg, Quantity: 6, Price: 300.0
+Item Name: Butter/200g, Quantity: 8, Price: 480.0
+Total Price: Rs. 780.0 Order ID: 00009
+
