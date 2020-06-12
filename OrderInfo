@@ -1,0 +1,44 @@
+package project;
+
+       /********************************************************************************************************
+       * This class implements FileWriter_Interface which has a method write(). This method is overridden here
+       * which creates a file OrderInfo.txt if and only if it doesn't exist If the file already exists, then it
+       * is appended with all the information regarding a particular order i-e: order ID, Item name, price,
+       * total price and total cost.
+       * *******************************************************************************************************/
+
+//import statements
+import java.io.File;
+import java.io.FileWriter;
+
+//start OrderInfo class
+public class OrderInfo implements FileWriter_Interface{
+
+    //orderFile object of File Class
+    File orderFile;
+
+    @Override
+    public void write(String s) {
+
+        //try block to catch any exception
+        try{
+            //giving the path name
+            orderFile=new File("OrderInfo.txt");
+
+            //if the specified file doesn't exist, then a new file is created
+            if(!orderFile.exists())
+                orderFile.createNewFile();
+
+            //append file
+            FileWriter writeFile=new FileWriter(orderFile, true);
+            writeFile.write(s);
+            writeFile.close();
+
+        }//end try
+        catch(Exception e){
+            e.printStackTrace();
+        }//end catch
+    }//end OrderInfoFile
+
+
+}//end OrderInfo Class
