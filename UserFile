@@ -1,0 +1,54 @@
+package project;
+
+/****************************************************************************************************
+ * This class implements FileWriter_Interface has a method write().This method is overridden here. It
+ * creates a file UserData.txt if and only if it doesn't exist and stores some usernames and passwords
+ * into it, which are used at the time of logging in. If the file already exists, then it is appended
+ * with the new usernames and passwords at the time of sign up.
+ ******************************************************************************************************/
+
+
+//import statements
+import java.io.File;
+import java.io.FileWriter;
+
+//start UserFile
+public class UserFile implements FileWriter_Interface{
+
+    File file;
+
+    @Override
+    public void write(String s) {
+        try{
+            file=new File("UserData.txt");
+
+            //if the specified file doesn't exist, then a new file is created
+            if(!file.exists()) {
+
+                file.createNewFile();
+
+                FileWriter writeFile=new FileWriter(file);
+
+                //these usernames and passwords are then written into the file.
+                //these are default usernames and passwords
+                writeFile.write("User1 abc1 123\n");
+                writeFile.write("User2 abc2 456\n");
+                writeFile.write("User3 abc3 789\n");
+                writeFile.close();
+            }//end if
+
+            //append file
+            FileWriter appendFile=new FileWriter(file, true);
+            appendFile.write(s);
+            appendFile.close();
+
+        }//end try
+
+        catch(Exception e){
+            e.printStackTrace();
+        }//end catch
+
+
+    }//end method write
+
+}//end UserFile Class
