@@ -1,0 +1,204 @@
+package project;
+
+/******************************************************************************************************
+ * The third stage is signing up. By clicking on the "Sign Up" button in the login stage, a Sign Up
+ * window pops up in which the user can make a new account by providing an email, a username and password
+ * for his account. The username and email are then checked with pre-existing usernames and emails in
+ * UserData file to see whether they're already in use or not. If either of them is in in use then the
+ * user will be asked to provide some other one.
+ *
+ * However, if it is found that the username and email are unique then they are written into the UserData
+ * file and the Sign Up is confirmed. The user is then asked to go back and login to continue.
+ *
+ * By logging in with this username and password, the user is given access to the next stage.
+ * ****************************************************************************************************/
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Signup_Window{
+
+    private String Email;
+    private String UserName;
+    private String password;
+
+    Label lbl_Title=new Label("Sign Up\n\n");
+    Label lbl_Username=new Label("Username:\t\t");
+    Label lbl_Password=new Label("Password:\t\t");
+    Label lbl_Email=new Label("\tEmail:\t\t");
+    Label lbl_Message=new Label();
+
+    Button btn_Confirm=new Button("Confirm");
+    Button btn_Back=new Button("Go Back");
+
+    TextField txtUS=new TextField();
+    PasswordField txtPS=new PasswordField();
+    TextField txtEM=new TextField();
+
+
+    UserFile userFile_Obj=new UserFile();
+
+    //Adding Stages
+    Stage signUpStage=new Stage();
+
+    public void setSignupWindow(){
+
+        signUpStage.setTitle("SIGN UP");
+        signUpStage.setHeight(600);
+        signUpStage.setWidth(500);
+
+        //Adding Labels
+        lbl_Title.setStyle("-fx-text-fill: white; -fx-font-size: 40; -fx-font-weight: bold; -fx-underline: true");
+        lbl_Username.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: black");
+        lbl_Password.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: black");
+        lbl_Email.setStyle("-fx-font-family: 'Arial'; -fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: black");
+        lbl_Message.setStyle("-fx-text-fill: red; -fx-font-size: 12; -fx-font-weight: bold; -fx-underline: true");
+
+        //Adding Button
+        btn_Confirm.setStyle("-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: cadetblue");
+        btn_Confirm.setPrefWidth(100);
+        btn_Back.setStyle("-fx-font-weight: bold; -fx-font-size: 15; -fx-text-fill: cadetblue");
+        btn_Back.setPrefWidth(100);
+
+        ActionPerfomed();
+
+        //Adding Text fields
+        txtUS.setPrefWidth(180);
+        txtUS.setPrefHeight(20);
+        txtPS.setPrefWidth(180);
+        txtPS.setPrefHeight(20);
+
+        //Adding textfield for emails
+        txtEM.setPrefWidth(180);
+        txtEM.setPrefHeight(20);
+
+        HBox hbUsername=new HBox(10);
+        hbUsername.getChildren().addAll(lbl_Username, txtUS);
+        hbUsername.setAlignment(Pos.CENTER);
+
+        HBox hbPassword=new HBox(10);
+        hbPassword.getChildren().addAll(lbl_Password, txtPS);
+        hbPassword.setAlignment(Pos.CENTER);
+
+        HBox hbEmail=new HBox(10);
+        hbEmail.getChildren().addAll(lbl_Email, txtEM);
+        hbEmail.setAlignment(Pos.CENTER);
+
+        VBox vbItems=new VBox(10);
+        vbItems.getChildren().addAll(lbl_Title, lbl_Message, hbUsername, hbPassword, hbEmail, btn_Confirm, btn_Back);
+        vbItems.setAlignment(Pos.CENTER);
+
+        Image SignUpImage=new Image("file:ss.gif");
+        ImageView SignUpIV=new ImageView();
+        SignUpIV.setImage(SignUpImage);
+        SignUpIV.setPreserveRatio(true);
+        SignUpIV.setFitHeight(550);
+
+        StackPane pane=new StackPane();
+        pane.getChildren().addAll(SignUpIV, vbItems);
+
+        Scene scene=new Scene(pane, 500, 600);
+        signUpStage.setScene(scene);
+        signUpStage.showAndWait();
+
+    }
+
+    public void ActionPerfomed(){
+        btn_Confirm.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    Email = txtEM.getText();
+                    UserName = txtUS.getText();
+                    password = txtPS.getText();
+                }
+                catch (NullPointerException e) {lbl_Message.setText("Fill in all the fields.");}
+
+                if(Email.isEmpty()||UserName.isEmpty()||password.isEmpty())
+                    lbl_Message.setText("Fill in all the fields.");
+
+                else if(writeIntoFile(Email, UserName, password)){
+                    txtUS.clear();
+                    txtEM.clear();
+                    txtPS.clear();
+                }
+
+                else {
+                    lbl_Message.setText("Your Sign Up was successful. Go Back and Login to Continue.");
+                    userFile_Obj.write(Email+ " "+ " "+ UserName+ " "+ password);
+                }
+            }
+        });
+
+        btn_Back.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Login_Window login_window_object=new Login_Window();
+                signUpStage.close();
+                login_window_object.setLoginWindow();
+            }
+        });
+    }
+
+
+    public boolean writeIntoFile(String email, String userName, String password){
+
+        try {
+            userFile_Obj.write("");
+            Scanner readFile = new Scanner(userFile_Obj.file);
+            while(readFile.hasNext()){
+
+                String a=readFile.next();
+                String b=readFile.next();
+                String c=readFile.next();
+
+                if(isEmailRepeated(a, email)){
+                    lbl_Message.setText("**This email is already in use. Try again.");
+                    return true;
+                }
+                else if(isUserNameRepeated(b, userName)) {
+                    lbl_Message.setText("**This Username is currently unavailable. Try another.");
+                    return true;
+                }
+                else {
+                    return false;
+                }
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+        return false;
+    }
+
+    public boolean isEmailRepeated(String a, String email){
+        if(a.equals(email))
+            return true;
+        return false;
+    }
+
+    public boolean isUserNameRepeated(String b, String username){
+        if(b.equals(username))
+            return true;
+        return false;
+    }
+
+
+}
