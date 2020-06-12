@@ -1,0 +1,144 @@
+package project;
+
+/*********************************************************************************************************
+ * This class contains the code for displaying the receipt. It opens up a new window which contains a label
+ * and a "CHECK OUT" button. The label is where all the information is written. The information includes
+ * orderID, item name, item quantity, total price for each quantity purchased, total cost of everything and
+ * the time of purchase.
+ *
+ * The "CHECK OUT" button will exit the program.
+ *
+ * This is also the point of the program where the order is written into the OrderInfo file.
+ *********************************************************************************************************/
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Scanner;
+
+public class Receipt_Window {
+
+   static Calendar time=Calendar.getInstance();
+   static SimpleDateFormat timeFormat=new SimpleDateFormat("HH:mm:ss");
+   static SimpleDateFormat dateFormat=new SimpleDateFormat("dd-MM-yyyy");
+
+    static int orderID;
+    static String ID;
+
+    public static void display() throws FileNotFoundException {
+
+        Stage receiptStage=new Stage();
+
+        receiptStage.setTitle("Receipt");
+        receiptStage.setHeight(650);
+        receiptStage.setWidth(350);
+        receiptStage.initModality(Modality.APPLICATION_MODAL);
+
+        Label lbl_Receipt=new Label();
+        lbl_Receipt.setPrefSize(300, 600);
+        lbl_Receipt.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 11");
+
+        time.getTime();
+        timeFormat.format(time.getTime());
+        dateFormat.format(time.getTime());
+
+        ItemInfo price=new ItemInfo();
+
+        OrderInfo writeFile=new OrderInfo();
+
+        writeFile.write("");
+        Scanner readFile=new Scanner(writeFile.orderFile);
+        while(readFile.hasNext()) {
+            ID = readFile.next();
+        }
+        orderID=Integer.parseInt(ID);
+        orderID++;
+
+        lbl_Receipt.setText("\t\tOnline Grocery Store\n\n" + "Order ID:\t\t\t\t"+String.format("%05d",orderID) +"\n\n*******************************************\n" +
+                         " NAME   \t"+" PRICE  \t"+"  QUANTITY\n\n"+
+                        ((ShoppingGUI.cb1.isSelected()) ? ShoppingGUI.cb1.getText() + "  \tRs. " +price.ItemPrice[0] +"\t    x" + ShoppingGUI.txt1.getText() + "\n" : "") +
+                        (ShoppingGUI.cb2.isSelected() ? ShoppingGUI.cb2.getText() + "  \t\tRs. " +price.ItemPrice[1] +"\t    x" + ShoppingGUI.txt2.getText() + "\n" : "") +
+                        (ShoppingGUI.cb3.isSelected() ? ShoppingGUI.cb3.getText() + "  \tRs. " +price.ItemPrice[2] +"\t    x" + ShoppingGUI.txt3.getText() + "\n" : "") +
+                        (ShoppingGUI.cb4.isSelected() ? ShoppingGUI.cb4.getText() + "  \t\tRs. " +price.ItemPrice[3] +"\t    x" + ShoppingGUI.txt4.getText() + "\n" : "") +
+                        (ShoppingGUI.cb5.isSelected() ? ShoppingGUI.cb5.getText() + "  \tRs. " +price.ItemPrice[4] +"\t    x" + ShoppingGUI.txt5.getText() + "\n" : "") +
+                        (ShoppingGUI.cb6.isSelected() ? ShoppingGUI.cb6.getText() + "  \tRs. " +price.ItemPrice[5] +"\t    x" + ShoppingGUI.txt6.getText() + "\n" : "") +
+                        (ShoppingGUI.cb7.isSelected() ? ShoppingGUI.cb7.getText() + "  \tRs. " +price.ItemPrice[6] +"\t    x" + ShoppingGUI.txt7.getText() + "\n" : "") +
+                        (ShoppingGUI.cb8.isSelected() ? ShoppingGUI.cb8.getText() + "  \tRs. " +price.ItemPrice[7] +"\t    x" + ShoppingGUI.txt8.getText() + "\n" : "") +
+                        (ShoppingGUI.cb9.isSelected() ? ShoppingGUI.cb9.getText() + "  \tRs. " +price.ItemPrice[8] +"\t    x" + ShoppingGUI.txt9.getText() + "\n" : "") +
+                        (ShoppingGUI.cb10.isSelected() ? ShoppingGUI.cb10.getText() + "  \tRs. " +price.ItemPrice[9] +"\t    x" + ShoppingGUI.txt10.getText() + "\n" : "") +
+                        (ShoppingGUI.cb11.isSelected() ? ShoppingGUI.cb11.getText() + "  \tRs. " +price.ItemPrice[10] +"\t    x" + ShoppingGUI.txt11.getText() + "\n" : "") +
+                        (ShoppingGUI.cb12.isSelected() ? ShoppingGUI.cb12.getText() + "  \tRs. " +price.ItemPrice[11] +"\t    x" + ShoppingGUI.txt12.getText() + "\n" : "") +
+                        (ShoppingGUI.cb13.isSelected() ? ShoppingGUI.cb13.getText() + "  \tRs. " +price.ItemPrice[12] +"\t    x" + ShoppingGUI.txt13.getText() + "\n" : "") +
+                        (ShoppingGUI.cb14.isSelected() ? ShoppingGUI.cb14.getText() + "  \tRs. " +price.ItemPrice[13] +"\t    x" + ShoppingGUI.txt14.getText() + "\n" : "") +
+                        (ShoppingGUI.cb15.isSelected() ? ShoppingGUI.cb15.getText() + "  \tRs. " +price.ItemPrice[14] +"\t    x" + ShoppingGUI.txt15.getText() + "\n" : "") +
+                        (ShoppingGUI.cb16.isSelected() ? ShoppingGUI.cb16.getText() + "  \tRs. " +price.ItemPrice[15] +"\t    x" + ShoppingGUI.txt16.getText() + "\n" : "") +
+                        (ShoppingGUI.cb17.isSelected() ? ShoppingGUI.cb17.getText() + "  \tRs. " +price.ItemPrice[16] +"\t    x" + ShoppingGUI.txt17.getText() + "\n" : "") +
+                        (ShoppingGUI.cb18.isSelected() ? ShoppingGUI.cb18.getText() + "  \tRs. " +price.ItemPrice[17] +"\t    x" + ShoppingGUI.txt18.getText() + "\n" : "") +
+                        (ShoppingGUI.cb19.isSelected() ? ShoppingGUI.cb19.getText() + "  \tRs. " +price.ItemPrice[18] +"\t    x" + ShoppingGUI.txt19.getText() + "\n" : "") +
+                        (ShoppingGUI.cb20.isSelected() ? ShoppingGUI.cb20.getText() + "  \tRs. " +price.ItemPrice[19] +"\t    x" + ShoppingGUI.txt20.getText() + "\n" : "")
+                         + "\nTotal\t\t\t\t  " + ShoppingGUI.txtTotal.getText() +
+                        "\n\n*******************************************\n\n" + "Date:  " + dateFormat.format(time.getTime()) +
+                        "\t     Time:  "+timeFormat.format(time.getTime())
+
+
+                );
+
+        addRecords(ShoppingGUI.cb1, ShoppingGUI.txt1, 0);
+        addRecords(ShoppingGUI.cb2, ShoppingGUI.txt2, 1);
+        addRecords(ShoppingGUI.cb3, ShoppingGUI.txt3, 2);
+        addRecords(ShoppingGUI.cb4, ShoppingGUI.txt4, 3);
+        addRecords(ShoppingGUI.cb5, ShoppingGUI.txt5, 4);
+        addRecords(ShoppingGUI.cb6, ShoppingGUI.txt6, 5);
+        addRecords(ShoppingGUI.cb7, ShoppingGUI.txt7, 6);
+        addRecords(ShoppingGUI.cb8, ShoppingGUI.txt8, 7);
+        addRecords(ShoppingGUI.cb9, ShoppingGUI.txt9, 8);
+        addRecords(ShoppingGUI.cb10, ShoppingGUI.txt10, 9);
+        addRecords(ShoppingGUI.cb11, ShoppingGUI.txt11, 10);
+        addRecords(ShoppingGUI.cb12, ShoppingGUI.txt12, 11);
+        addRecords(ShoppingGUI.cb13, ShoppingGUI.txt13, 12);
+        addRecords(ShoppingGUI.cb14, ShoppingGUI.txt14, 13);
+        addRecords(ShoppingGUI.cb15, ShoppingGUI.txt15, 14);
+        addRecords(ShoppingGUI.cb16, ShoppingGUI.txt16, 15);
+        addRecords(ShoppingGUI.cb17, ShoppingGUI.txt17, 16);
+        addRecords(ShoppingGUI.cb18, ShoppingGUI.txt18, 17);
+        addRecords(ShoppingGUI.cb19, ShoppingGUI.txt19, 18);
+        addRecords(ShoppingGUI.cb20, ShoppingGUI.txt20, 19);
+
+        writeFile.write("Total Price: "+ShoppingGUI.txtTotal.getText()+ " Order ID: "+ String.format("%05d\n\n",orderID));
+
+
+        Button btn=new Button("CHECK OUT");
+        btn.setOnAction(actionEvent -> System.exit(0));
+
+        VBox vb=new VBox(10);
+        vb.getChildren().addAll(lbl_Receipt, btn);
+        vb.setPadding(new Insets(10));
+        vb.setStyle("-fx-background-color: white");
+        vb.setAlignment(Pos.CENTER);
+
+        Scene scene=new Scene(vb);
+        receiptStage.setScene(scene);
+        receiptStage.showAndWait();
+
+    }
+
+    public static void addRecords(CheckBox cb, TextField txt, int index){
+
+        OrderInfo writeFile=new OrderInfo();
+        ItemInfo ItemCost=new ItemInfo();
+        if(cb.isSelected()){
+            writeFile.write("Item Name: "+ cb.getText() + ", Quantity: "+ txt.getText()+ ", Price: " + ItemCost.ItemPrice[index] * Double.parseDouble(txt.getText())+"\n");
+        }
+
+
+    }
+
+}
