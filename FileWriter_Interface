@@ -1,0 +1,10 @@
+package project;
+
+//an interface which contains a method write(String s) which is overridden in two classes
+//UserFile and OrderInfo
+
+public interface FileWriter_Interface {
+
+    void write(String s);
+
+}
