@@ -1,5 +1,6 @@
 package project;
 
+
 /*******************************************************************************************************
  * The second stage of the program is Login. This class displays a login window which prompts the user
  * to login by giving his username and password. If the username and password match the ones stored in
@@ -181,3 +182,4 @@ public class Login_Window {
     }//end verifyUserName()
 
 }
+
