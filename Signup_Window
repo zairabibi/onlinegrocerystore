@@ -33,9 +33,9 @@ import java.util.Scanner;
 
 public class Signup_Window{
 
-    private String Email;
-    private String UserName;
-    private String password;
+    private String Email; //to store user's email provided in email textfield
+    private String UserName; //to store user's username provided in Username textfield
+    private String password; //to store user's password provided in password textfield
 
     Label lbl_Title=new Label("Sign Up\n\n");
     Label lbl_Username=new Label("Username:\t\t");
@@ -140,7 +140,7 @@ public class Signup_Window{
 
                 else {
                     lbl_Message.setText("Your Sign Up was successful. Go Back and Login to Continue.");
-                    userFile_Obj.write(Email+ " "+ " "+ UserName+ " "+ password);
+                    userFile_Obj.write(Email+ " "+ " "+ UserName+ " "+ password+"  \n");
                 }
             }
         });
@@ -148,8 +148,8 @@ public class Signup_Window{
         btn_Back.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                Login_Window login_window_object=new Login_Window();
                 signUpStage.close();
+                Login_Window login_window_object=new Login_Window();
                 login_window_object.setLoginWindow();
             }
         });
